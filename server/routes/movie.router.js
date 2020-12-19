@@ -2,6 +2,19 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+router.get('/', (req, res) => {
+  const sqlText = `SELECT * FROM movies ORDER BY title;`
+  pool.query(sqlText)
+    .then((result) => {
+      res.send(result.rows)
+      console.log(result.rows)
+    })
+    .catch((error) => {
+      console.log(`Error making database query ${sqlText}`, error);
+      res.sendStatus(500)
+    })
+})
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
