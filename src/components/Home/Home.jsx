@@ -17,13 +17,13 @@ class Home extends Component {
             <div>
                 <h1>List of Movies</h1>
                 <p>Click the poster image to see more details</p>
-                {this.props.reduxState.movies.map((movie, i, j, k) => {
+                {this.props.reduxState.movies.map((movie, i) => {
                     return(
-                        <div>
-                            <p key={i} className="title"> {movie.title}</p>
-                            <img key={j} className="poster" src={movie.poster}
+                        <div key={i}>
+                            <p className="title"> {movie.title}</p>
+                            <img className="poster" src={movie.poster}
                              onClick={() => this.goToDetails(movie)} alt="Movie Poster"></img>
-                            <p key={k} className="description-home">
+                            <p className="description-home">
                                 {movie.description}
                             </p>
                         </div>

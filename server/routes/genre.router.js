@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
-router.get('/', (req, res) => {
-  // Add query to get all genres
-  res.sendStatus(500)
-});
+// router.get('/', (req, res) => {
+//   // Add query to get all genres
+//   res.sendStatus(500)
+// });
 
 router.get('/', (req, res) => {
   movieId = req.query.id; 
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     WHERE movies.id = $1;`
   pool.query(sqlText)
     .then((result) => {
-      res.send(result.rows)
+      res.send(result.rows, movieId)
       console.log(result.rows)
     })
     .catch((error) => {
