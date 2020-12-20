@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,19 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {connect} from 'react-redux';
-import Checkbox from '@material-ui/core/Checkbox';
-import ListItemText from '@material-ui/core/ListItemText';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-        },
-    }
-}
 
 const styles = theme => ({
     root: {
@@ -34,24 +22,8 @@ const styles = theme => ({
     },
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
-      },
+    },
 });
-
-const genres = [
-  'Adventure',
-  'Animated',
-  'Biographical',
-  'Comedy',
-  'Disaster',
-  'Drama',
-  'Epic',
-  'Fantasy',
-  'Musical',
-  'Romantic',
-  'Science Fiction',
-  'Space-Opera',
-  'Superhero'
-];
 
 class AddMovie extends Component {
 
@@ -66,23 +38,14 @@ class AddMovie extends Component {
 
 
 
-    ITEM_HEIGHT = 48;
-    ITEM_PADDING_TOP = 8;
-    MenuProps = {
-    PaperProps: {
-        style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-        },
-    }
-};
 
     goHome = () => {
         this.props.history.push('/');
     }
 
     handleDropChange = event => {
-        this.setState({ genre: event.target.value });
+        this.setState({ 
+            [event.target.name]: event.target.value });
       };
 
 
@@ -96,28 +59,44 @@ class AddMovie extends Component {
                     Back to Movies
                 </button>
                 <h1>Hello from AddMovie</h1>
-                <div className={classes.root}>
+                <form className={classes.root} autoComplete="off">
                     <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="select-multiple">Genres</InputLabel>
+                        <InputLabel htmlFor="genre-simple">Genres</InputLabel>
                         <Select
-                            multiple
                             value={this.state.newMovie.genre}
                             onChange={this.handleDropChange}
-                            input={<Input id="select-multiple" />}
-                            MenuProps={MenuProps}
-                        >
-                            {genres.map(genre => (
-                                <MenuItem key={genre} value={genre}>
-                                    {genre}
-                                </MenuItem>
-                                ))}
+                            inputProps={{
+                                name: 'genre',
+                                id: 'genre-simple',
+                              }}
+                            >
+                            <MenuItem value=''>
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={"Adventure"}>Adventure</MenuItem>
+                            <MenuItem value={"Animated"}>Animated</MenuItem>
+                            <MenuItem value={"Biographical"}>Biographical</MenuItem>
+                            <MenuItem value={"Comedy"}>Comedy</MenuItem>
+                            <MenuItem value={"Disaster"}>Disaster</MenuItem>
+                            <MenuItem value={"Drama"}>Drama</MenuItem>
+                            <MenuItem value={"Epic"}>Epic</MenuItem>
+                            <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
+                            <MenuItem value={"Musical"}>Musical</MenuItem>
+                            <MenuItem value={"Romantic"}>Romantic</MenuItem>
+                            <MenuItem value={"Science Fiction"}>Science Fiction</MenuItem>
+                            <MenuItem value={"Space-Opera"}>Space-Opera</MenuItem>
+                            <MenuItem value={"Superhero"}>Superhero</MenuItem>
                         </Select>
                     </FormControl>
-                </div>
+                </form>
             </div>
         )
     }
 }
+
+AddMovie.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 const mapReduxStateToProps = reduxState => ({
     reduxState
