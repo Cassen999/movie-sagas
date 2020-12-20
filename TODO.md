@@ -30,7 +30,7 @@
 - [x] Movie poster on click routes to the details view
 
 ## DETAILS
-- [] Displays poster, title, description, and genres
+- [x] Displays poster, title, description, and genres
 - [] Back to list button
     - [] Clear redux state with another if clause that return initialState
 

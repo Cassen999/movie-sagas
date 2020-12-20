@@ -7,9 +7,18 @@ class Details extends Component {
         this.props.dispatch({type: 'FETCH_GENRES', payload: this.props.reduxState.details.id })
     }
 
+    backHome = () => {
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div>
+                <button 
+                    type="button"
+                    onClick={this.backHome}>
+                    Back to Movies
+                    </button>
                 <div>
                 <h1>Title</h1>
                     <p className="title"> {this.props.reduxState.details.title}</p>
