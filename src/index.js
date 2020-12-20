@@ -36,10 +36,23 @@ function* fetchGenres(action) {
     }
 }
 
+function* fetchAllGenres(action) {
+    console.log('In fetchAllGenres')
+    try{
+        const response = yield Axios.get('/api/genre')
+        yield put({type: 'SET_GENRES', payload: response.data})
+        console.log(response.data)
+    }
+    catch(error) {
+        console.log('Error in fetchAllGenres index.js ', error)
+    }
+}
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies)
     yield takeEvery('FETCH_GENRES', fetchGenres)
+    yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres)
 }
 
 // Create sagaMiddleware

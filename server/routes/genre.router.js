@@ -2,10 +2,19 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
-// router.get('/', (req, res) => {
-//   // Add query to get all genres
-//   res.sendStatus(500)
-// });
+router.get('/', (req, res) => {
+  // Add query to get all genres
+  const sqlText = `SELECT * FROM genres`
+  pool.query(sqlText)
+  .then((result) => {
+    res.send(result.rows)
+    console.log(result.rows)
+  })
+  .catch((error) => {
+    console.log('Error making db query get all genres', error)
+    res.sendStatus(500)
+  })
+});
 
 router.get('/:id', (req, res) => {
   let movieId = req.params.id; 

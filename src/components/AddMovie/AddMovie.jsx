@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     root: {
-      display: 'flex',
+      display: 'inline-grid',
       flexWrap: 'wrap',
     },
     formControl: {
@@ -23,71 +22,118 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+        display: 'grid'
+      },
+      button: {
+        margin: theme.spacing.unit,
+      }
 });
 
 class AddMovie extends Component {
+
+    componentDidMount() {
+        this.props.dispatch({type: 'FETCH_ALL_GENRES'})
+    }
 
     state = {
         newMovie: {
             title: '',
             poster: '',
             description: '',
-            genre: []
+            genre_id: ''
         }
     }
-
-
-
 
     goHome = () => {
         this.props.history.push('/');
     }
 
-    handleDropChange = event => {
-        this.setState({ 
-            [event.target.name]: event.target.value });
-      };
+    handleChange = (event, inputProperty) => {
+        this.setState({
+            newMovie:{
+                ...this.state.newMovie,
+                [inputProperty]: event.target.value, 
+            }
+        })
+    }
+
+    handleClick = (event) => {
+        event.preventDefault();
+        console.log('In handleClick')
+    }
 
 
     render() {
+        console.log(this.state)
         const { classes } = this.props;
         return (
             <div>
-                <button
-                    type="button"
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    className={classes.button}
                     onClick={this.goHome}>
                     Back to Movies
-                </button>
+                </Button>
                 <h1>Hello from AddMovie</h1>
-                <form className={classes.root} autoComplete="off">
+                <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleClick}>
+                    <TextField
+                        id="standard"
+                        label="Title"
+                        value={this.state.newMovie.title}
+                        onChange={(event) => this.handleChange(event, 'title')}
+                        className={classes.textField}
+                        margin="normal"
+                    />
+                    <TextField
+                        id="standard"
+                        label="Poster URL"
+                        value={this.state.newMovie.poster}
+                        onChange={(event) => this.handleChange(event, 'poster')}
+                        className={classes.textField}
+                        margin="normal"
+                    />
+                    <TextField
+                        id="standard-multiline-flexible"
+                        label="Description"
+                        multiline
+                        rowsMax="10"
+                        value={this.state.newMovie.description}
+                        onChange={(event) => this.handleChange(event, 'description')}
+                        className={classes.textField}
+                        margin="normal"
+                    />
                     <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="genre-simple">Genres</InputLabel>
+                        <InputLabel htmlFor="genre-simple">Genre</InputLabel>
                         <Select
-                            value={this.state.newMovie.genre}
-                            onChange={this.handleDropChange}
-                            inputProps={{
-                                name: 'genre',
-                                id: 'genre-simple',
-                              }}
+                            value={this.state.newMovie.genre_id}
+                            onChange={(event) => this.handleChange(event, 'genre_id')}
                             >
-                            <MenuItem value=''>
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={"Adventure"}>Adventure</MenuItem>
-                            <MenuItem value={"Animated"}>Animated</MenuItem>
-                            <MenuItem value={"Biographical"}>Biographical</MenuItem>
-                            <MenuItem value={"Comedy"}>Comedy</MenuItem>
-                            <MenuItem value={"Disaster"}>Disaster</MenuItem>
-                            <MenuItem value={"Drama"}>Drama</MenuItem>
-                            <MenuItem value={"Epic"}>Epic</MenuItem>
-                            <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
-                            <MenuItem value={"Musical"}>Musical</MenuItem>
-                            <MenuItem value={"Romantic"}>Romantic</MenuItem>
-                            <MenuItem value={"Science Fiction"}>Science Fiction</MenuItem>
-                            <MenuItem value={"Space-Opera"}>Space-Opera</MenuItem>
-                            <MenuItem value={"Superhero"}>Superhero</MenuItem>
+                            {this.props.reduxState.genres.map((genre) => {
+                                return(
+                                    <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>
+                                )
+                            })}
                         </Select>
                     </FormControl>
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        className={classes.button}
+                        onClick={this.goHome}>
+                        Cancel
+                    </Button>
+                    <Button 
+                        type="submit"
+                        variant="contained" 
+                        color="primary" 
+                        className={classes.button}>
+                        Add Movie
+                    </Button>
                 </form>
             </div>
         )
