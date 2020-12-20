@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
     card: {
@@ -71,30 +72,44 @@ class Home extends Component {
                 <p>Click the movie to see more details</p>
                 {this.props.reduxState.movies.map((movie, i) => {
                     return(
-                        <Card className={classes.card} 
-                        onClick={() => this.goToDetails(movie)}>
-                            <CardHeader
-                                avatar={
-                                    <Avatar aria-label="Movie" className={classes.avatar}>
-                                    {movie.title[0]}
-                                    </Avatar>
-                                }
-                                action={
-                                    <IconButton>
-                                    </IconButton>
-                                }
-                                title={movie.title}
-                                />
-                            <CardMedia
-                                className={classes.media}
-                                image={movie.poster}
-                            />
-                            <CardContent>
-                                <Typography component="p">
-                                    {movie.title}
-                                </Typography>
-                            </CardContent>
-                        </Card>)
+                        <Grid
+                            container
+                            spacing={0}
+                            direction="column"
+                            alignItems="center"
+                            justify="center"
+                            style={{ minHeight: '100vh' }}
+                            >
+                            <div key={i} className="card">
+                                <Grid item xs={3}>
+                                    <Card className={classes.card} 
+                                    onClick={() => this.goToDetails(movie)}>
+                                        <CardHeader
+                                            avatar={
+                                                <Avatar aria-label="Movie" className={classes.avatar}>
+                                                {movie.title[0]}
+                                                </Avatar>
+                                            }
+                                            action={
+                                                <IconButton>
+                                                </IconButton>
+                                            }
+                                            title={movie.title}
+                                            />
+                                        <CardMedia
+                                            className={classes.media}
+                                            image={movie.poster}
+                                        />
+                                        <CardContent>
+                                            <Typography component="p">
+                                                {movie.title}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            </div>
+                        </Grid>
+                        )
                     })                     
                 }
             </div>

@@ -18,9 +18,8 @@
   font-size: large;
 }
 
-.poster {
-  height:auto;
-  width:auto;
+.card {
+  justify-content: ;
 }
 
 @keyframes App-logo-spin {
