@@ -63,7 +63,9 @@ class AddMovie extends Component {
 
     handleClick = (event) => {
         event.preventDefault();
-        console.log('In handleClick')
+        console.log('In handleClick');
+        this.props.dispatch({type: 'ADD_MOVIE', payload: this.state.newMovie})
+        this.props.history.push('/')
     }
 
 

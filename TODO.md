@@ -34,13 +34,13 @@
 - [x] Back to list button
 
 ## ADD MOVIE
-- [] Displays:
-    - [] Input for movie title
-    - [] Input for poster URL
-    - [] Text area for movie description
-    - [] Dropdown of available genres
-- [] Local state to hold input data
-- [] Cancel button routes back to Home
+- [x] Displays:
+    - [x] Input for movie title
+    - [x] Input for poster URL
+    - [x] Text area for movie description
+    - [x] Dropdown of available genres
+- [x] Local state to hold input data
+- [x] Cancel button routes back to Home
 - [] Save button sends all data to database
     - [] Dispatch to saga for POST request
     - [] Clear inputs

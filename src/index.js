@@ -48,11 +48,20 @@ function* fetchAllGenres(action) {
     }
 }
 
+function* addMovie(action) {
+    try {    
+        yield Axios.post('/api/movie', action.payload)
+        } catch (error) {
+        console.log('error with element add request', error);
+    }
+}
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies)
     yield takeEvery('FETCH_GENRES', fetchGenres)
     yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres)
+    yield takeEvery('ADD_MOVIE', addMovie)
 }
 
 // Create sagaMiddleware
