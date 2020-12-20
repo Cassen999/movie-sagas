@@ -23,9 +23,6 @@ class Home extends Component {
                             <p className="title"> {movie.title}</p>
                             <img className="poster" src={movie.poster}
                              onClick={() => this.goToDetails(movie)} alt="Movie Poster"></img>
-                            <p className="description-home">
-                                {movie.description}
-                            </p>
                         </div>
                     )
                 })}

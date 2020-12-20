@@ -24,12 +24,12 @@ function* fetchMovies() {
     }
 }
 
-function* fetchGenres() {
+function* fetchGenres(action) {
     console.log('In fetchGenres')
     try{
-        const response = yield Axios.get('/api/genre')
+        const response = yield Axios.get('/api/genre/' + action.payload)
         yield put({type: 'SET_GENRES', payload: response.data})
-        console.log(response.data)
+        console.log(response.data, action.payload)
     }
     catch(error) {
         console.log('Error in fetchGenres index.js ', error)

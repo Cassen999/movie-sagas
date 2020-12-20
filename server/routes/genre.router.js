@@ -7,18 +7,18 @@ const pool = require('../modules/pool')
 //   res.sendStatus(500)
 // });
 
-router.get('/', (req, res) => {
-  movieId = req.query.id; 
-  console.log('movie id is', movieId); 
+router.get('/:id', (req, res) => {
+  let movieId = req.params.id; 
+  console.log('movie id is'); 
   // Add query to get all genres
   const sqlText = `
     SELECT title, name FROM movie_genres
     JOIN movies ON movies.id = movie_genres.movie_id
     JOIN genres ON genres.id = movie_genres.genre_id
     WHERE movies.id = $1;`
-  pool.query(sqlText)
+  pool.query(sqlText, [movieId])
     .then((result) => {
-      res.send(result.rows, movieId)
+      res.send(result.rows)
       console.log(result.rows)
     })
     .catch((error) => {

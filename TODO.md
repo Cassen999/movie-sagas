@@ -27,7 +27,7 @@
 - [x] Displays list of movies with photo, name and description
 - [x] GET dispatch to saga and reducer
     - [x] Map Home reducer
-- [] Movie poster on click routes to the details view
+- [x] Movie poster on click routes to the details view
 
 ## DETAILS
 - [] Displays poster, title, description, and genres

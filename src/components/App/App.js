@@ -15,7 +15,6 @@ class App extends Component {
           <nav>
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/details">Details</Link></li>
               <li><Link to="/addMovie">AddMovie</Link></li>
             </ul>
           </nav>
@@ -24,7 +23,6 @@ class App extends Component {
           <Route exact path='/details' component={Details} />
           <Route exact path='/addMovie' component={AddMovie} />
         </Router>
-        <p>Empty Page</p>
       </div>
     );
   }
