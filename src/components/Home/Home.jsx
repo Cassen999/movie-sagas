@@ -4,17 +4,28 @@ import {connect} from 'react-redux';
 class Home extends Component {
 
     componentDidMount() {
-        this.props.dispatch({type: 'FETCH_MOVIES'})
+        this.props.dispatch({type: 'FETCH_MOVIES'});
     }
 
     goToDetails = (movie) => {
-        this.props.history.push('/details')
-        this.props.dispatch({type: "SET_DETAILS", payload: movie})
+        this.props.history.push('/details');
+        this.props.dispatch({type: "SET_DETAILS", payload: movie});
+    }
+
+    goToAddMovie = () => {
+        this.props.history.push('/addMovie');
     }
 
     render() {
         return (
             <div>
+                <>
+                <button
+                    type="button"
+                    onClick={this.goToAddMovie}>
+                    Add your own movie
+                </button>
+                </>
                 <h1>List of Movies</h1>
                 <p>Click the poster image to see more details</p>
                 {this.props.reduxState.movies.map((movie, i) => {
