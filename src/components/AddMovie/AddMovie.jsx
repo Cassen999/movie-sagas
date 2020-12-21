@@ -81,7 +81,7 @@ class AddMovie extends Component {
                     onClick={this.goHome}>
                     Back to Movies
                 </Button>
-                <h1>Hello from AddMovie</h1>
+                <h1>Add a Movie</h1>
                 <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleClick}>
                     <TextField
                         id="standard"

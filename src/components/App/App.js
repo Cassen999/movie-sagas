@@ -12,11 +12,6 @@ class App extends Component {
       <div className="App">
         <h1>Movies!</h1>
         <Router>
-          <nav>
-            <ul>
-              <li><Link to="/addMovie">AddMovie</Link></li>
-            </ul>
-          </nav>
           {/* ADD PAGES! */}
           <Route exact path='/' component={Home} />
           <Route exact path='/details' component={Details} />

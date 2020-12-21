@@ -10,7 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     card: {
@@ -62,54 +62,44 @@ class Home extends Component {
         return (
             <div>
                 <>
-                <button
-                    type="button"
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    className={classes.button}
                     onClick={this.goToAddMovie}>
-                    Add your own movie
-                </button>
+                    Add your own Movie
+                </Button>
                 </>
                 <h1>List of Movies</h1>
                 <p>Click the movie to see more details</p>
                 {this.props.reduxState.movies.map((movie, i) => {
                     return(
-                        <Grid
-                            container
-                            spacing={0}
-                            direction="column"
-                            alignItems="center"
-                            justify="center"
-                            style={{ minHeight: '100vh' }}
-                            >
-                            <div key={i} className="card">
-                                <Grid item xs={3}>
-                                    <Card className={classes.card} 
-                                    onClick={() => this.goToDetails(movie)}>
-                                        <CardHeader
-                                            avatar={
-                                                <Avatar aria-label="Movie" className={classes.avatar}>
-                                                {movie.title[0]}
-                                                </Avatar>
-                                            }
-                                            action={
-                                                <IconButton>
-                                                </IconButton>
-                                            }
-                                            title={movie.title}
-                                            />
-                                        <CardMedia
-                                            className={classes.media}
-                                            image={movie.poster}
-                                        />
-                                        <CardContent>
-                                            <Typography component="p">
-                                                {movie.title}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            </div>
-                        </Grid>
-                        )
+                        <div key={i} className="card">
+                            <Card className={classes.card} 
+                            onClick={() => this.goToDetails(movie)}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar aria-label="Movie" className={classes.avatar}>
+                                        {movie.title[0]}
+                                        </Avatar>
+                                    }
+                                    action={
+                                        <IconButton>
+                                        </IconButton>
+                                    }
+                                    title={movie.title}
+                                    />
+                                <CardMedia
+                                    className={classes.media}
+                                    image={movie.poster}
+                                />
+                                <CardContent>
+                                    <Typography component="p">
+                                        {movie.title}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </div>)
                     })                     
                 }
             </div>

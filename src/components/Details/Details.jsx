@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    input: {
+      display: 'none',
+    },
+  });
 
 class Details extends Component {
 
@@ -12,13 +24,17 @@ class Details extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
-                <button 
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    className={classes.button}
                     type="button"
                     onClick={this.backHome}>
                     Back to Movies
-                    </button>
+                    </Button>
                 <div>
                 <h1>Title</h1>
                     <p className="title"> {this.props.reduxState.details.title}</p>
@@ -48,8 +64,12 @@ class Details extends Component {
     }
 }
 
+Details.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapReduxStateToProps = reduxState => ({
     reduxState
 });
 
-export default connect(mapReduxStateToProps)(Details);
+export default connect(mapReduxStateToProps)(withStyles(styles)(Details));
