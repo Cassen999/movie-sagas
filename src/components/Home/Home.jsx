@@ -41,19 +41,24 @@ const styles = theme => ({
 class Home extends Component {
 
     handleExpandClick = () => {
+        // material ui
         this.setState(state => ({ expanded: !state.expanded }));
       };
 
     componentDidMount() {
+        // to have movies on reload
         this.props.dispatch({type: 'FETCH_MOVIES'});
     }
 
     goToDetails = (movie) => {
+        // route to details component
         this.props.history.push('/details');
+        // send data to details to display clicked movie
         this.props.dispatch({type: "SET_DETAILS", payload: movie});
     }
 
     goToAddMovie = () => {
+        // route to addMovie component
         this.props.history.push('/addMovie');
     }
 
@@ -72,6 +77,7 @@ class Home extends Component {
                 </>
                 <h1>List of Movies</h1>
                 <p>Click the movie to see more details</p>
+                {/* map the movies reducer to render each movie */}
                 {this.props.reduxState.movies.map((movie, i) => {
                     return(
                         <div key={i} className="card">

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// This gets all movies
 router.get('/', (req, res) => {
   const sqlText = `SELECT * FROM movies ORDER BY title;`
   pool.query(sqlText)
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
     })
 })
 
+// This is the post to add a movie to the database
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

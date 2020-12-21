@@ -36,9 +36,11 @@ const styles = theme => ({
 class AddMovie extends Component {
 
     componentDidMount() {
+        // dispatch on mount to be able to have genres to use in state
         this.props.dispatch({type: 'FETCH_ALL_GENRES'})
     }
 
+    // Local state to send the user input movie to database
     state = {
         newMovie: {
             title: '',
@@ -49,9 +51,12 @@ class AddMovie extends Component {
     }
 
     goHome = () => {
+        // route to home component
         this.props.history.push('/');
     }
 
+    // Make a handleChange that takes in an inputProperty so that
+    // the this function can be used for all inputs and dropdown
     handleChange = (event, inputProperty) => {
         this.setState({
             newMovie:{
@@ -64,7 +69,9 @@ class AddMovie extends Component {
     handleClick = (event) => {
         event.preventDefault();
         console.log('In handleClick');
+        // dispatch to add the movie to database
         this.props.dispatch({type: 'ADD_MOVIE', payload: this.state.newMovie})
+        // route to home component
         this.props.history.push('/')
     }
 
@@ -87,6 +94,7 @@ class AddMovie extends Component {
                         id="standard"
                         label="Title"
                         value={this.state.newMovie.title}
+                        // pass in event and input property for handleChange
                         onChange={(event) => this.handleChange(event, 'title')}
                         className={classes.textField}
                         margin="normal"
@@ -95,16 +103,19 @@ class AddMovie extends Component {
                         id="standard"
                         label="Poster URL"
                         value={this.state.newMovie.poster}
+                        // pass in event and input property for handleChange
                         onChange={(event) => this.handleChange(event, 'poster')}
                         className={classes.textField}
                         margin="normal"
                     />
                     <TextField
+                        // multiline used so user can see what they are typing
                         id="standard-multiline-flexible"
                         label="Description"
                         multiline
                         rowsMax="10"
                         value={this.state.newMovie.description}
+                        // pass in event and input property for handleChange
                         onChange={(event) => this.handleChange(event, 'description')}
                         className={classes.textField}
                         margin="normal"
@@ -113,8 +124,10 @@ class AddMovie extends Component {
                         <InputLabel htmlFor="genre-simple">Genre</InputLabel>
                         <Select
                             value={this.state.newMovie.genre_id}
+                            // pass in event and input property for handleChange
                             onChange={(event) => this.handleChange(event, 'genre_id')}
                             >
+                                {/* map genres to populate the dropdown */}
                             {this.props.reduxState.genres.map((genre) => {
                                 return(
                                     <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>

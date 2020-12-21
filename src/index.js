@@ -12,6 +12,7 @@ import createSagaMiddleware from 'redux-saga';
 import Axios from 'axios';
 import { takeEvery, put } from 'redux-saga/effects';
 
+// This generator is used to get all the movies for the Home component
 function* fetchMovies() {
     console.log('In fetchMovies')
     try {
@@ -24,6 +25,9 @@ function* fetchMovies() {
     }
 }
 
+// This generator is used to pass in a specific id of the movie
+// that was clicked in the home component in order to get the 
+// genres of that specific movie
 function* fetchGenres(action) {
     console.log('In fetchGenres')
     try{
@@ -36,6 +40,7 @@ function* fetchGenres(action) {
     }
 }
 
+// This generator is used to get all genres in database
 function* fetchAllGenres(action) {
     console.log('In fetchAllGenres')
     try{
@@ -67,6 +72,7 @@ function* rootSaga() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+// details reducer used to store data from movie clicked in home component
 const details = (state = [], action) => {
     switch (action.type) {
         case 'SET_DETAILS':
