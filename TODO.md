@@ -41,6 +41,5 @@
     - [x] Dropdown of available genres
 - [x] Local state to hold input data
 - [x] Cancel button routes back to Home
-- [] Save button sends all data to database
-    - [] Dispatch to saga for POST request
-    - [] Clear inputs
+- [x] Save button sends all data to database
+    - [x] Dispatch to saga for POST request
