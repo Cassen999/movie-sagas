@@ -23,6 +23,26 @@
   margin: 1rem;
 }
 
+body {
+  background-image: url("../../background-image/film-background-1334067869u9d.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.description-home {
+  color: rgba(255, 255, 255, 0.623);
+  font-size: 20px;
+  background-color: #5C5954;
+  opacity: 85%;
+  border-radius: 20%;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

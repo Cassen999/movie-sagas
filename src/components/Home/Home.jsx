@@ -14,10 +14,16 @@ import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     card: {
-      maxWidth: 400,
+      width: 200,
+      marginLeft: 200,
+      marginRight: 200,
+      marginBottom: 50
+
     },
     media: {
-      height: 0,
+      height: 150,
+      width: 200,
+      justifyContent: 'center',
       paddingTop: '56.25%', // 16:9
     },
     actions: {
@@ -65,7 +71,7 @@ class Home extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>
+            <div className="cardDiv">
                 <>
                 <Button 
                     variant="contained" 
