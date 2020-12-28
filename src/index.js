@@ -56,6 +56,7 @@ function* fetchAllGenres(action) {
 function* addMovie(action) {
     try {    
         yield Axios.post('/api/movie', action.payload)
+        yield fetchMovies();
         } catch (error) {
         console.log('error with element add request', error);
     }
