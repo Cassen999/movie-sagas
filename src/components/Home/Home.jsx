@@ -15,29 +15,16 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
     card: {
       width: 200,
-      marginLeft: 200,
-      marginRight: 200,
-      marginBottom: 50
-
+      marginLeft: 30,
+      marginRight: 30,
+      marginBottom: 10,
+      justifyContent: 'space-evenly'
     },
     media: {
       height: 150,
       width: 200,
-      justifyContent: 'center',
+      justifyContent: 'space-evenly',
       paddingTop: '56.25%', // 16:9
-    },
-    actions: {
-      display: 'flex',
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
     },
     avatar: {
       backgroundColor: red[500],
